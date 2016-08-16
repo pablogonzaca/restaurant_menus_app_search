@@ -10,3 +10,6 @@ Run `grunt` for building and `grunt serve` for preview.
 ## Testing
 
 Running `grunt test` will run the unit tests with karma.
+
+## The first time that you clone the project
+Running `bower install & npm install` inside the project folder to install all required packages.
