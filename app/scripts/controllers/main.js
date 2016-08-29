@@ -1,17 +1,24 @@
-'use strict';
 
-/**
- * @ngdoc function
- * @name restaurantMenusAppSearchApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the restaurantMenusAppSearchApp
- */
-angular.module('restaurantMenusAppSearchApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+(function () {
+    'use strict';
+
+    angular
+        .module('restaurantMenusAppSearchApp')
+        .controller('MainCtrl', Controller);
+
+    function Controller(UserService) {
+        var vm = this;
+
+        vm.user = null;
+
+        initController();
+
+        function initController() {
+            // get current user
+            UserService.GetCurrent().then(function (user) {
+                vm.user = user;
+            });
+        }
+    }
+
+})();

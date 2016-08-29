@@ -33,6 +33,10 @@ angular.module('restaurantMenusAppSearchApp')
               m1: {
                   lat: 10.029039113909,
                   lng: -84.09422904253006,
+                  icon: {
+                    iconUrl: '/images/Restaurant.png',
+                    iconSize: [32, 37]
+                  },
                   message: 'My house'
               }
           },
