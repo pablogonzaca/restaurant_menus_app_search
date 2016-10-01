@@ -11,55 +11,64 @@
           'ngRoute',
           'ngSanitize',
           'ngTouch',
-          'leaflet-directive'
+          'leaflet-directive',
+          'ngMaterial'
         ])
-        .config(config)
-        .run(run);
+        .config(config);
 
     function config($routeProvider) {
       $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main',
-        data: { activeTab: 'main' }
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl',
+        controllerAs: 'vm'
       })
       .when('/mapas', {
         templateUrl: 'views/mapas.html',
         controller: 'MapasCtrl',
-        controllerAs: 'mapas',
-        data: { activeTab: 'mapas' }
+        controllerAs: 'vm'
       })
-      .when('/account', {
-        templateUrl: 'views/account.html',
-        controller: 'AccountCtrl',
-        controllerAs: 'account',
-        data: { activeTab: 'account' }
+      .when('/about', {
+        templateUrl: 'views/about.html',
+        controller: 'AboutCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/userLogin', {
+        templateUrl: 'views/loginUser.html',
+        controller: 'LoginUserCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/restaurantLogin', {
+        templateUrl: 'views/loginRestaurant.html',
+        controller: 'LoginRestaurantCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/userRegister', {
+        templateUrl: 'views/registerUser.html',
+        controller: 'RegisterUserCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/restaurantRegister', {
+        templateUrl: 'views/registerRestaurant.html',
+        controller: 'RegisterRestaurantCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/userHome', {
+        templateUrl: 'views/homeUser.html',
+        controller: 'HomeUserCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/restaurantHome', {
+        templateUrl: 'views/homeRestaurant.html',
+        controller: 'HomeRestaurantCtrl',
+        controllerAs: 'vm'
       })
       .otherwise({
         redirectTo: '/'
       });
     }
 
-    function run($http, $rootScope, $window) {
-        // add JWT token as default auth header
-        $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
 
-        // update active tab on state change
-        $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-            $rootScope.activeTab = toState.data.activeTab;
-        });
-    }
-
-    // manually bootstrap angular after the JWT token is retrieved from the server
-    $(function () {
-        // get JWT token from server
-        $.get('/app/token', function (token) {
-            window.jwtToken = token;
-
-            angular.bootstrap(document, ['restaurantMenusAppSearchApp']);
-        });
-    });
 })();
 
 

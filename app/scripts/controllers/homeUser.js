@@ -3,7 +3,7 @@
 
     angular
         .module('restaurantMenusAppSearchApp')
-        .controller('AboutCtrl', Controller);
+        .controller('HomeUserCtrl', Controller);
 
     function Controller($window) {
         var vm = this;

@@ -4,12 +4,13 @@
     <meta charset="utf-8">
     <title></title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -21,43 +22,9 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div class="header">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-
-            <a class="navbar-brand" href="#/">restaurantMenusAppSearch</a>
-          </div>
-
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/account">Login</a></li>
-              <li><a ng-href="#/main">About</a></li>
-              <li><a ng-href="#/mapas">Ubicacion</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="container">
-    <div ng-view=""></div>
+    <div ng-view="">
     </div>
-
-    <div class="footer">
-      <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span>Search restaurant menus</p>
-      </div>
     </div>
 
 
@@ -87,17 +54,24 @@
     <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
     <script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
     <script src="bower_components/angular-leaflet-directive/dist/plugins/Google.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/login.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/maps.js"></script>
-        <script src="scripts/services/flash.service.js"></script>
-        <script src="scripts/services/user.service.js"></script>
+        <script src="scripts/controllers/homeRestaurant.js"></script>
+        <script src="scripts/controllers/homeUser.js"></script>
+        <script src="scripts/controllers/loginRestaurant.js"></script>
+        <script src="scripts/controllers/loginUser.js"></script>
+        <script src="scripts/controllers/registerRestaurant.js"></script>
+        <script src="scripts/controllers/registerUser.js"></script>
         <!-- endbuild -->
 </body>
 </html>
