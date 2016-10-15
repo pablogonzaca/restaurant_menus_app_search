@@ -12,7 +12,8 @@
           'ngSanitize',
           'ngTouch',
           'leaflet-directive',
-          'ngMaterial'
+          'ngMaterial',
+          'ngTable'
         ])
         .config(config);
 

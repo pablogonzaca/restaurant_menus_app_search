@@ -23,9 +23,7 @@
 
             $http(req).then(
                 function(response){
-                    console.log(response);
                     if(response.status === 200)
-                        console.log(response.data.token);
                         $window.localStorage['jwtToken'] = response.data.token;
                         $window.location.href = '/#/restaurantHome';
                 },

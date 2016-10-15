@@ -34,7 +34,9 @@
                  data: {
                     'name': vm.name,
                     'email': vm.email,
-                    'password': vm.password
+                    'password': vm.password,
+                    'location': {},
+                    'menu': []
                 }
             }
 

@@ -5,10 +5,34 @@
         .module('restaurantMenusAppSearchApp')
         .controller('HomeRestaurantCtrl', Controller);
 
-    function Controller($scope, $q, $window, $http, $mdDialog) {
+    function Controller($scope, $q, $window, $http, $mdDialog, NgTableParams) {
         var vm = this;
         vm.display = false;
 
+        vm.init = function(){
+            $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.localStorage['jwtToken'];
+            var req = {
+                 method: 'GET',
+                 url: 'http://localhost:3000/api/restaurants/current',
+                 headers: {
+                   'Content-Type': 'application/json'
+                 }
+            }
+
+            $http(req).then(
+                function(response){
+                    if(response.status === 200)
+                        vm.restaurante = response.data;
+                        console.log(vm.restaurante);
+                        $window.location.href = '/#/restaurantHome';
+                },
+                function(error){
+                    console.log(error);
+                }
+            );
+        }
+
+        vm.init();
 
         angular.extend($scope, {
           center: {
@@ -59,30 +83,32 @@
                 enable: ['click'],
                 logic: 'emit'
             }
-          },
-          data: {
-            email: "",
-            password: "",
-            nombre: "La cuchara de mi abuela",
-            location: {
-              latitude: undefined,
-              longitude: undefined
-            },
-            id: "",
-            menu: [
-              {
-                nombre: "",
-                precio: "",
-                descripcion: "",
-                descuento: "",
-                comentarios: ["guid1", "guid2", "guid3"],
-                puntuaciones: ["guid4", "guid5", "guid6"]
-              },
-              {},
-              {}
-            ]
           }
         });
+
+
+        vm.restaurante = {};
+        // {
+        //     email: "",
+        //     password: "",
+        //     name: "La cuchara de mi abuela",
+        //     location: {
+        //       latitude: undefined,
+        //       longitude: undefined
+        //     },
+        //     _id: "",
+        //     menu: [
+        //       {
+        //         name: "casado",
+        //         precio: "2500",
+        //         descripcion: "a cachete",
+        //         descuento: "12%",
+        //         imagen: "",
+        //         comentarios: ["guid1", "guid2", "guid3"],
+        //         puntuaciones: ["guid4", "guid5", "guid6"]
+        //       }
+        //     ]
+        // }
 
         function get_current_position(){
             var deferred = $q.defer();
@@ -143,7 +169,6 @@
                 vm.latitudes = [];
               }
             }
-
         });
 
         $scope.$on('leafletDirectiveMarker.click', function(event, wrap){
@@ -152,8 +177,24 @@
         });
 
         vm.set_location = function(ev){
-          vm.display = true;
-          showPrompt(ev, 'To choose your location', 'Make 2 clicks over the map');
+            console.log(vm.restaurante.location.latitude);
+          if(vm.restaurante.location.latitude && vm.restaurante.location.longitude){
+                var marker = {
+                    lat: vm.restaurante.location.latitude ,
+                    lng: vm.restaurante.location.longitude,
+                    icon: {
+                      iconUrl: '/images/Restaurant.png',
+                      iconSize: [32, 37]
+                    },
+                    message: vm.restaurante.name
+                };
+                $scope.markers[vm.restaurante.name] = marker;
+                vm.display = true;
+                showPrompt(ev, 'To change your location', 'Make 2 clicks over the map');
+          }else{
+                vm.display = true;
+                showPrompt(ev, 'To choose your location', 'Make 2 clicks over the map');
+          }
         }
 
         function showPrompt(ev, title, message) {
@@ -174,9 +215,8 @@
         };
 
         function add_marker(longitud, latitud){
-
-          $scope.data.location["long"] = parseFloat(longitud);
-          $scope.data.location["lat"] = parseFloat(latitud);
+          vm.restaurante.location.longitude = parseFloat(longitud);
+          vm.restaurante.location.latitude= parseFloat(latitud);
           var marker = {
             lat: parseFloat(latitud),
             lng: parseFloat(longitud),
@@ -184,41 +224,145 @@
               iconUrl: '/images/Restaurant.png',
               iconSize: [32, 37]
             },
-            message: 'Your restaurant'
+            message: vm.restaurante.name
           };
-          $scope.markers[$scope.data.nombre] = marker;
+          $scope.markers[vm.restaurante.name] = marker;
+          updateRestaurant();
         };
 
-        function update(lat, lon){
+        vm.display_menus = false;
+        vm.add_or_update_menu = function(){
+          vm.display_menus = true;
+        }
+
+        var isNameDuplicated = function (itemName) {
+            return vm.restaurante.menu.some(function (entry) {
+                return entry.name.toUpperCase() == itemName.toUpperCase();
+            });
+        };
+
+        vm.restaurante.menu = vm.restaurante.menu;
+        // the item being added
+        vm.newItem = { "name": "", "precio": "", "descuento": "", "descripcion": ""};
+        // indicates if the view is being loaded
+        vm.loading = true;
+        // indicates if the view is in add mode
+        vm.addMode = false;
+        // Toggle the grid between add and normal mode
+        vm.toggleAddMode = function () {
+            vm.addMode = !vm.addMode;
+        };
+
+        // Toggle an item between normal and edit mode
+        vm.toggleEditMode = function (item) {
+            // Toggle
+            item.editMode = !item.editMode;
+            console.log(item);
+
+            // if item is not in edit mode anymore
+            if (!item.editMode) {
+                // Restore name
+                item.name = item.serverName;
+            } else {
+                // save server name to restore it if the user cancel edition
+                item.serverName = item.name;
+
+                // Set edit mode = false and restore the name for the rest of items in edit mode
+                // (there should be only one)
+                vm.restaurante.menu.forEach(function (i) {
+                    // item is not the item being edited now and it is in edit mode
+                    if (item.id != i.id && i.editMode) {
+                        // Restore name
+                        i.name = i.serverName;
+                        i.editMode = false;
+                    }
+                });
+            }
+        };
+
+        // Creates the 'newItem' on the server
+        vm.createItem = function () {
+            // Check if the item is already on the list
+            var duplicated = isNameDuplicated(vm.newItem.name);
+            if (!duplicated) {
+                    vm.restaurante.menu.unshift(vm.newItem);
+                    vm.newItem = { "name": "", "precio": "", "descuento": "", "descripcion": ""};
+                    updateMenu();
+                    vm.addMode = !vm.addMode;
+            } else {
+                // notification.error("El platillo ya existe.");
+            }
+        }
+
+        // Gets an item from the server using the id
+        vm.readItem = function (itemId) {
+            knownItemsFactory.get({ id: itemId }, requestSuccess, requestError);
+        }
+
+        // Updates an item
+        vm.updateItem = function (item) {
+            item.editMode = false;
+            var index = -1;
+            for (var i = 0; i < vm.restaurante.menu.length; i++) {
+                if(vm.restaurante.menu[i]["name"] == item["name"]){
+                    index = i;
+                }
+            }
+            var object = vm.restaurante.menu[index];
+            for (var x in item){
+                object[x] = item[x];
+            }
+            vm.restaurante.menu[index] = item;
+            updateRestaurant();
+        }
+
+        // Deletes an item
+        vm.deleteItem = function (item) {
+            var index = vm.restaurante.menu.indexOf(item);
+            vm.restaurante.menu.splice(index, 1);
+        }
+
+        // In edit mode, if user press ENTER, update item
+        vm.updateOnEnter = function (item, args) {
+            // if key is enter
+            if (args.keyCode == 13) {
+                vm.updateItem(item);
+                // remove focus
+                args.target.blur();
+            }
+        };
+
+        // In add mode, if user press ENTER, add item
+        vm.saveOnEnter = function (item, args) {
+            // if key is enter
+            if (args.keyCode == 13) {
+                vm.createItem();
+                // remove focus
+                args.target.blur();
+            }
+        };
+
+        function updateRestaurant(){
             var req = {
                  method: 'PUT',
-                 url: 'http://localhost:3000/api/restaurants/' + $scope.data.id,
+                 url: 'http://localhost:3000/api/restaurants/' + vm.restaurante._id,
                  headers: {
                    'Content-Type': 'application/json'
                  },
-                 data: {
-                    location: {
-                      latitude: lat,
-                      longitude: lon
-                    }
-                 },
+                 data: vm.restaurante
             }
 
             $http(req).then(
                 function(response){
+                    console.log(response);
                     if(response.status === 200)
-                        // $window.localStorage['jwtToken'] = response.data.token;
-                        $window.location.href = '/#/restaurantHome';
+                        console.log(response.data);
                 },
                 function(error){
-                    // debe ser quitada, linea usada para pruebas en front end
-                    $window.location.href = '/#/restaurantHome';
                     console.log(error);
                 }
             );
         }
 
-
     }
-
 })();
