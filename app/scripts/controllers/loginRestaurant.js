@@ -27,11 +27,12 @@
                     if(response.status === 200)
                         console.log(response.data.token);
                         $window.localStorage['jwtToken'] = response.data.token;
+                        $window.localStorage['logged'] = "rest";
                         $window.location.href = '/#/restaurantHome';
                 },
                 function(error){
-                    // debe ser quitada, linea usada para pruebas en front end
-                    $window.location.href = '/#/restaurantHome';
+                    alert("Incorrect credentials!");
+                    $window.location.href = '/#/restaurantLogin';
                     console.log(error);
                 }
             );

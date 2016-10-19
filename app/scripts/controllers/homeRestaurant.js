@@ -9,7 +9,6 @@
         var vm = this;
         vm.display = false;
 
-
         angular.extend($scope, {
           center: {
             lat: 0,
@@ -45,7 +44,7 @@
                   lat: 10.029039113909,
                   lng: -84.09422904253006,
                   icon: {
-                    iconUrl: '/images/Restaurant.png',
+                    iconUrl: '/images/restaurant.png',
                     iconSize: [32, 37]
                   },
                   message: 'My house'
@@ -174,14 +173,13 @@
         };
 
         function add_marker(longitud, latitud){
-
           $scope.data.location["long"] = parseFloat(longitud);
           $scope.data.location["lat"] = parseFloat(latitud);
           var marker = {
             lat: parseFloat(latitud),
             lng: parseFloat(longitud),
             icon: {
-              iconUrl: '/images/Restaurant.png',
+              iconUrl: '/images/restaurant.png',
               iconSize: [32, 37]
             },
             message: 'Your restaurant'

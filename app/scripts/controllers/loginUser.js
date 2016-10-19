@@ -14,14 +14,14 @@
             $window.location.href = '/';
         }
 
-        this.login = function(){
+        this.login = function () {
             var req = {
-                 method: 'POST',
-                 url: 'http://localhost:3000/api/users/authenticate',
-                 headers: {
-                   'Content-Type': 'application/json'
-                 },
-                 data: {
+                method: 'POST',
+                url: 'http://localhost:3000/api/users/authenticate',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: {
                     'name': vm.username,
                     'email': vm.email,
                     'password': vm.password
@@ -29,12 +29,16 @@
             }
 
             $http(req).then(
-                function(response){
-                    if(response.status === 200)
-                        $window.location.href = '/#/userHome';
+                function (response) {
+                    if (response.status === 200)
+                        console.log(response.data.token);
+                    $window.localStorage['jwtToken'] = response.data.token;
+                    $window.localStorage['logged'] = "user";
+                    $window.location.href = '/#/userHome';
                 },
-                function(error){
-                    console.log(error);
+                function (error) {
+                    alert("Credenciales incorrectos");
+                    // console.log(error);
                 }
             );
         }

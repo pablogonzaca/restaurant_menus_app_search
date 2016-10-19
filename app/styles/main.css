@@ -1,102 +1,274 @@
+.container {
+    padding: 0px;
+}
+
+/* navbar */
+.navbar-default {
+    background-color: #DC564A;
+    border-color: #ffffff;
+}
+/* title */
+.navbar-default .navbar-brand {
+    color: #ffffff;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #ffffff;
+}
+/* link */
+.navbar-default .navbar-nav > li > a {
+    color: #ffffff;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #ffffff;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #ffffff;
+    background-color: #DC564A;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #ffffff;
+    background-color: #DC564A;
+}
+/* caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: #ffffff;
+    border-bottom-color: #ffffff;
+}
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #ffffff;
+    border-bottom-color: #ffffff;
+}
+.navbar-default .navbar-nav > .open > a .caret,
+.navbar-default .navbar-nav > .open > a:hover .caret,
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: #ffffff;
+    border-bottom-color: #ffffff;
+}
+/* mobile version */
+.navbar-default .navbar-toggle {
+    border-color: #ffffff;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #DC564A;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #ffffff;
+}
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #ffffff;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #ffffff;
+    }
+}
+
+.navbar-collapse{
+    border: none;
+}
+
+#loginModal{
+    margin: 2%;
+}
+
+.modal-content, body > div > div > div > div > div{
+    background: #38A28C !important;
+}
+
+#loginModal > div > div > div.modal-footer > div > button{
+    background: white;
+    color: dimgray;
+}
+
+#loginModal > div.modal-header > h1,
+#loginModal > div > div > h2,
+#loginModal > div.modal-body > form > div:nth-child(3) > span.pull-right a,
+#loginModal > div.modal-body > form > div:nth-child(3) > span:nth-child(3) a{
+    color: white;
+}
+
+#loginModal div.modal-body > form > div:nth-child(3) > button,
+#loginModal div.modal-body > form > div:nth-child(5) > button,
+body > div > div > div > div > div > form > div > button:nth-child(1),
+body > div > div > div > div > div > form > div > button:nth-child(2),
+body > div > div > div > div > div > form > div > button:nth-child(3){
+    background: #DC564A;
+    border: #DC564A;
+}
+
+.ng-scope {
+    background: #D9C592;
+}
+
+.login-container {
+    margin-top: 20%;
+    background: #D9C592;
+    padding: 5%;
+}
+
+.login-container h1{
+    font-size: 400%;
+    color: #DC564A;
+}
+
+.login-types {
+    margin: 0px;
+    padding:0px;
+    list-style: none;
+}
+
+.login-types li {
+    padding: 1%;
+}
+
+.login-types a {
+    font-size: large;
+    color: #ffffff;
+    width: 160px;
+    background: #38A28C;
+    border: #38A28C;
+}
+
+body > div.md-dialog-container.ng-scope > md-dialog{
+    background: #38A28C;
+}
+
+.md-dialog-content > h2,
+.md-dialog-content > div > p,
+#loginModal > div > div > div > div.leaflet-map-pane > div.leaflet-objects-pane > div.leaflet-popup-pane > div > div.leaflet-popup-content-wrapper,
+#loginModal > div > div > div > div.leaflet-map-pane > div.leaflet-objects-pane > div.leaflet-popup-pane > div > div.leaflet-popup-content-wrapper > div{
+    color:white;
+    background: #38A28C;
+}
+
+.modal-header{
+    border: none;
+}
+
+body > div.md-dialog-container.ng-scope > md-dialog > md-dialog-actions > button.md-primary.md-cancel-button.md-button.ng-scope.md-default-theme.md-ink-ripple
+,body > div.md-dialog-container.ng-scope > md-dialog > md-dialog-actions > button.md-primary.md-confirm-button.md-button.md-default-theme.md-ink-ripple
+,body > div.md-dialog-container.ng-scope > md-dialog > md-dialog-actions > button.md-primary.md-cancel-button.md-button.ng-scope.md-default-theme.md-ink-ripple span
+,body > div.md-dialog-container.ng-scope > md-dialog > md-dialog-actions > button.md-primary.md-confirm-button.md-button.md-default-theme.md-ink-ripple span
+{
+    background: #DC564A;
+    color: white;
+}
+
+
+
+
 .browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
 }
 
 body {
-  padding: 0;
+    padding: 0;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
 .footer {
-  padding-left: 15px;
-  padding-right: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 10px;
 }
+
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+    padding-bottom: 19px;
 }
 
 /* Custom page footer */
 .footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
+    padding-top: 19px;
+    color: #777;
+    border-top: 1px solid #e5e5e5;
 }
 
 .container-narrow > hr {
-  margin: 30px 0;
+    margin: 30px 0;
 }
 
 /* Main marketing message and sign up button */
 .jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
+    text-align: center;
+    border-bottom: 1px solid #e5e5e5;
 }
+
 .jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
+    font-size: 21px;
+    padding: 14px 24px;
 }
 
 /* Supporting marketing content */
 .marketing {
-  margin: 40px 0;
+    margin: 40px 0;
 }
+
 .marketing p + h4 {
-  margin-top: 28px;
+    margin-top: 28px;
 }
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
+    .container {
+        max-width: 730px;
+    }
 
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
-  .centered-form{
+    /* Remove the padding we set earlier */
+    .header,
+    .marketing,
+    .footer {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    /* Space out the masthead */
+    .header {
+        margin-bottom: 30px;
+    }
+
+    /* Remove the bottom border on the jumbotron for visual effect */
+    .jumbotron {
+        border-bottom: 0;
+    }
+
+    .centered-form {
+        margin-top: 60px;
+    }
+
+    .centered-form .panel {
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+    }
+}
+
+.centered-form {
     margin-top: 60px;
-  }
+}
 
-  .centered-form .panel{
+.centered-form .panel {
     background: rgba(255, 255, 255, 0.8);
     box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
-  }
-}
-
-
-
-.centered-form{
-  margin-top: 60px;
-}
-
-.centered-form .panel{
-  background: rgba(255, 255, 255, 0.8);
-  box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
 }

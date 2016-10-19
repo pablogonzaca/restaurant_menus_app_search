@@ -1,9 +1,9 @@
-<div id="loginModal" class="modal show" tabindex="-1"  aria-hidden="true">
-  <div class="modal-dialog">
-  <div class="modal-content">
+<div align="center">
+    <img width="25%" src="../images/logo.png">
+</div>
+<div class="modal-content" id="loginModal">
       <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h1 class="text-center">Register User</h1>
+          <h1 class="text-center">Register Client</h1>
       </div>
       <div class="modal-body">
           <form class="form col-md-12 center-block">
@@ -26,9 +26,7 @@
       </div>
       <div class="modal-footer">
           <div class="col-md-12">
-          <span class="pull-right"><a href="#/userLogin">Cancel</a></span><span>
+              <button ng-click="vm.redirect()" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
           </div>
       </div>
   </div>
-  </div>
-</div>
