@@ -8,11 +8,7 @@
     function Controller($window,$scope) {
 
         var vm = this;
-
-        $scope.item = "red";
-
-        alert($scope.item);
-
+        
         if($window.localStorage['logged'] == "user"){
             $window.location.href = '/#/userHome';
         }

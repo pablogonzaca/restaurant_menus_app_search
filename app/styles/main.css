@@ -105,19 +105,23 @@ body > div > div > div > div > div > form > div > button:nth-child(3){
     border: #DC564A;
 }
 
+.navbar{
+    border:none;
+}
+
 .ng-scope {
-    background: #D9C592;
+    background: #170021;
 }
 
 .login-container {
     margin-top: 20%;
-    background: #D9C592;
+    background: #170021;
     padding: 5%;
 }
 
 .login-container h1{
     font-size: 400%;
-    color: #DC564A;
+    color: white;
 }
 
 .login-types {
