@@ -5,9 +5,34 @@
         .module('restaurantMenusAppSearchApp')
         .controller('HomeRestaurantCtrl', Controller);
 
-    function Controller($scope, $q, $window, $http, $mdDialog) {
+    function Controller($scope, $q, $window, $http, $mdDialog, NgTableParams) {
         var vm = this;
         vm.display = false;
+
+        vm.init = function(){
+            $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.localStorage['jwtToken'];
+            var req = {
+                 method: 'GET',
+                 url: 'http://localhost:3000/api/restaurants/current',
+                 headers: {
+                   'Content-Type': 'application/json'
+                 }
+            }
+
+            $http(req).then(
+                function(response){
+                    if(response.status === 200)
+                        vm.restaurante = response.data;
+                        console.log(vm.restaurante);
+                        $window.location.href = '/#/restaurantHome';
+                },
+                function(error){
+                    console.log(error);
+                }
+            );
+        }
+
+        vm.init();
 
         angular.extend($scope, {
           center: {
@@ -44,7 +69,7 @@
                   lat: 10.029039113909,
                   lng: -84.09422904253006,
                   icon: {
-                    iconUrl: '/images/restaurant.png',
+                    iconUrl: '/images/Restaurant.png',
                     iconSize: [32, 37]
                   },
                   message: 'My house'
@@ -173,13 +198,14 @@
         };
 
         function add_marker(longitud, latitud){
+
           $scope.data.location["long"] = parseFloat(longitud);
           $scope.data.location["lat"] = parseFloat(latitud);
           var marker = {
             lat: parseFloat(latitud),
             lng: parseFloat(longitud),
             icon: {
-              iconUrl: '/images/restaurant.png',
+              iconUrl: '/images/Restaurant.png',
               iconSize: [32, 37]
             },
             message: 'Your restaurant'
