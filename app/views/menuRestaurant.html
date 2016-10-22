@@ -1,0 +1,40 @@
+<div align="center">
+    <img height="40%" width="40%" src="../images/logo.png">
+</div>
+
+<div class="modal-content" id="loginModal">
+    <div class="modal-header">
+        <div>
+            <h2 class="text-center">Menu {{ name }}</h2>
+        </div>
+    </div>
+    <div class="modal-body menu-table-rest" style="height: 350px; overflow: auto;">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Discount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="x in menus">
+                <td>{{ x.name }}</td>
+                <td>{{ x.precio }}</td>
+                <td>{{ x.descripcion }}</td>
+                <td>{{ x.descuento }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<a href="#/comments/{{id}}" type="button" class="btn btn-info" style="background: #31B0D5; float: right; margin: 1%; margin-right: 3%">
+    Comments
+</a>
+
+
+
+

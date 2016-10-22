@@ -63,9 +63,23 @@
         function add_marker(longitud, latitud) {
             var marker = {
                 lat: parseFloat(latitud),
-                lng: parseFloat(longitud)
+                lng: parseFloat(longitud),
+                message: "YOUR LOCATION!"
             };
             $scope.markers['location'] = marker;
+        }
+
+        function add_marker_rest(longitud, latitud,index,name,id) {
+            var marker = {
+                lat: parseFloat(latitud),
+                lng: parseFloat(longitud),
+                icon: {
+                    iconUrl: '/images/Restaurant.png',
+                    iconSize: [32, 37]
+                },
+                message: name + "<br/>" + "<a href='#/menu/" + id  + "'>SEE MENU!</a>"
+            };
+            $scope.markers['rest'+index] = marker;
         }
 
         function get_current_position() {
@@ -84,7 +98,7 @@
             return deferred.promise;
         }
 
-        function get_position(locations) {
+        function get_position() {
             get_current_position()
                 .then(
                 function (value) {
@@ -99,21 +113,25 @@
                     $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.localStorage['jwtToken'];
                     var req = {
                         method: 'GET',
-                        url: 'http://localhost:3000/api/users/restaurants/' + $scope.center.lng + '/' + $scope.center.lat,
+                        url: 'http://localhost:3000/api/users/restaurants/' + $scope.center.lat + '/' + $scope.center.lng,
                         headers: {
                             'Content-Type': 'application/json'
                         }
                     };
-
-
-                    console.log(req);
-
+                    
                     $http(req).then(
                         function (response) {
-                            //if (response.status === 200)
-                            //vm.restaurante = response.data;
-                            console.log(response.data);
-                            //$window.location.href = '/#/userHome';
+                            if (response.status === 200){
+                                response.data.forEach(function (element, index, array) {
+                                    add_marker_rest(element.location.longitude,
+                                                    element.location.latitude,
+                                                    index,
+                                                    element.name,
+                                                    element._id
+                                    );
+                                    console.log(element);
+                                });
+                            }
                         },
                         function (error) {
                             console.log(error);

@@ -171,9 +171,46 @@ body > div.md-dialog-container.ng-scope > md-dialog > md-dialog-actions > button
     background: white;
 }
 
+h2{
+    color:white;
+}
+
+.menu-table-rest{
+    background: #ffcc66;
+    text-align: center;
+}
+
+#loginModal > div.modal-body.menu-table-rest > table > tbody > tr{
+    background:  #ffe6b3;
+}
+
+
+#loginModal > div.modal-body.menu-table-rest > table > thead > tr:first-child th{
+    text-align: center;
+}
+
 body > div > div > div:nth-child(2) > div > table > tbody > tr{
     background: white;
     text-align: center;
+}
+
+.leaflet-popup-content-wrapper{
+    background: #ffe6b3;
+}
+
+.leaflet-popup-content{
+    background: #ffe6b3;
+    text-align: center;
+}
+
+.mymenu{
+    margin: 1%;
+    border: #38A28C solid 1px;
+    background: #38A28C;
+}
+
+.mymenu h2{
+    color:white;
 }
 
 
