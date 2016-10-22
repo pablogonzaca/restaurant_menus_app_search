@@ -25,6 +25,7 @@
                 function(response){
                     if(response.status === 200)
                         $window.localStorage['jwtToken'] = response.data.token;
+                        $window.localStorage['logged'] = "rest";
                         $window.location.href = '/#/restaurantHome';
                 },
                 function(error){
