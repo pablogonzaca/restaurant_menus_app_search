@@ -5,14 +5,15 @@
 
     angular
         .module('restaurantMenusAppSearchApp', [
-            'ngAnimate',
-            'ngCookies',
-            'ngResource',
-            'ngRoute',
-            'ngSanitize',
-            'ngTouch',
-            'leaflet-directive',
-            'ngMaterial'
+          'ngAnimate',
+          'ngCookies',
+          'ngResource',
+          'ngRoute',
+          'ngSanitize',
+          'ngTouch',
+          'leaflet-directive',
+          'ngMaterial',
+          'ngTable'
         ])
         .config(config);
 
